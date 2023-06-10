@@ -1,0 +1,207 @@
+1. 개발자 환경 구축
+ - JVM(자바가상머신) : 메모리 관리 자동으로 해 줌
+   : 소스코드(.java) -> 바이트 코드(어느 곳에서도 자바프로그램을 실행할 수 있게 끔)
+
+    작업환경(OS) :  플랫폼
+
+ - IDE(이클립스) : 프로그래밍 개발할 때 필요한 기능 전부 모아둔 Tool
+                        java -> 저장 -> class 변환
+                        (명령어로 : javac 파일명.java => class 변환)
+                        import 기능 : 다른 사람 프로그램을 이클립스로 가져올 때 : file -> import
+                        export 기능 : 내가 만든 프로그램을 다른 사람에게 전달할 때  : file -> export
+	           이클립스의 workspace는 프로젝트를 저장하는 기본 폴더
+
+ - 환경변수 : 
+                 - 작업의 편리성을 위해서 사용하거나 다른 프로그램과 호환
+                 - 컴퓨터 부팅할 때 읽어오는 정보 : 운영체제가 관리
+                 - path, classpath : cmd 창에서 명령어를 이용해서 환경변수 설정 가능
+
+                                     하이브리드 앱
+ - 앱 프로그래밍 : 구글(Android) - 애플(IOS)
+                         java, kotlin          Object C
+
+ - 증강현실 : AR -> 실세계 위에 프로그래밍을 입히는 것
+ - 가상현실 : VR -> Virtual
+ - 웨어러블 컴퓨터 : 
+ - 유비쿼터스 : 
+
+ * JVM
+   소스 -> jvm -> 바이트코드(기계어)
+   바이트(기계어) -> jvm -> 실행
+
+ * 블록체인 : 분산 컴퓨터 처리 기술 - 위,변조 방지 기술 - 데이터를 블록으로 나눠 연결하는 방식
+
+ * 이클립스 단축키 
+    Ctrl + / : 주석 처리/해제
+    Ctrl + Shift + O : 자동 import
+    Ctrl + +/- : 폰트 크기 확대
+    Ctrl + Shift + F : 코드 자동 정렬
+
+ * 컴파일(Compile)언어 / 인터프리터(Interpreter) 언어
+        이외                       웹언어
+   C, C++, Java                 Jsp
+                                    Asp
+                                    Php
+
+2. 프로그래밍 언어 활용
+   * 소스코드 -> Compile -> 기계어로 변환(컴퓨터는 0,1)
+   
+   * 자바 상속 : extends 파일1, 파일2 but 상속을 여러 개 받고 싶다면 interface
+      - 다중 상속 지원 x
+      - private 접근제한자는 현재 페이지에만 사용이 가능(상속 x)
+
+   * final 키워드 : 상수 앞에 ex) final double PI = 3.14;
+     상속 x, 오버라이딩(재정의) x
+
+   * 객체 : 상황에 맞게 생략은 가능
+     필드(데이터 저장), 
+     생성자(객체를 초기화) -> new 객체를 초기화(인스턴트화)
+     getter, setter(캡슐화 : 필드에 직접 접근해서 사용하지 말고 setter로 저장, getter로 출력를 이용해서 작업) 
+     메소드(동작) : 반복되는 동작을 피하기 위해
+
+    protected : 같은 패키지 안에서 또는 상속 관계에 있는 코드끼리는 사용이 가능
+    리턴타입 : 기본형/참조형 : int, String, double / arr[], List<Member>, String, Double...
+    void는 return x -> sysout 사용해야할 때 void(참고)
+
+			매개변수 : parameter, 파라미터
+
+   * public List<Member> addNum(int num1, int num2) {
+          return null; //참조타입(객체타입) 초기화
+      }
+
+					List = ArrayList, List = Vector
+   * interface(만들 때) -> implements(구현)  : 다형성(왼쪽에는 부모 오른쪽은 자식)
+          new 사용x
+     본체 없음 ( {} x )
+
+   * 배열과                                                              컬렉션(List) 차이
+       - 길이고정                                                       / 가변길이
+       - 추가삭제가 어렵고                                          - 추가 삭제가 쉬움
+       - 배열의 중간 값을 지우면 빈 곳이 그대로              - 중간 값을 지우면 빈 곳을 뒤에 값이 채움
+         남아 있고
+
+3. 프로그래밍 언어 응용
+  * 조건문 : if, switch(변수명) : switch~case~break~default
+    반복문 : for, while, do-while
+
+  * 타입 크기 : byte(2의8승) - char(2) - short - int
+                    - 128 - 0 127
+    변수선언 : 사용하든 사용하지 않든 초기화
+    int i; -> 변수 초기화는 꼭 사용하기
+
+  * 배열 생성방법(3가지)
+    - 타입[] 배열명 = new 타입[배열개수];   ex) int[] arr = new int[10]; //1차원 배열
+                                                              int[][] arr = new int[5][10]; //2차원 배열
+
+    - 타입[] 배열명 = new 타입[] {초기값을 지정}   ex) int[] arr = new int[]{1, 2, 3};
+
+    -  int[] arr;
+             arr = {1, 2, 3, 4, 5}; x 
+
+       int[] arr = {1, 2, 3, 4, 5};  //배열 5개를 초기값으로 설정
+
+  * 참조형 타입 : String -> 값(문자열)을 비교할 때는 equals, 메모리 주소를 비교할 때는 ==
+     - String str1 = "koreait";  //한 곳의 메모리에 저장해 두고 공유
+       String str2 = "koreait";  //한 곳의 메모리에 저장해 두고 공유
+       
+       String str3 = new String("koreait"); //다른 메모리에 따로 저장
+       String str4 = new String("koreait"); //다른 메모리에 따로 저장
+
+  * 기본형 또는 참조형 타입의 초기값
+     int i = 0;  
+     long l = 0L;
+
+     float f = 0.0f; 
+     double d = 0.0
+
+     boolean b = false;
+     참조타입 nulll;
+
+
+   * 객체의 특징
+     1. 필드, 생성자, getter, setter, 메소드 (순서)
+     2. 생성자 재사용
+         - 현재 페이지에 있는 생성자를 재사용할 때는 this();
+         - 부모 페이지에 있는 생성자를 재사용할 때는 super();
+     3. 필드(변수x)는 초기값을 지정하지 않아도 자동으로 초기화 된다.
+
+4. 응용 sw 기초 기술 활용
+   * Collections(List, Set, Stack...)
+      1. List : 순서대로 인덱스번호로 처리
+         중복 값을 허용
+
+      2. Set : 순서없이 이름으로 처리
+             ex) userid: "koreait"
+                   key => value
+         중복을 허용 x
+
+     3. Stack : 선입후출 -> First In Last Out(FILO)
+        heap : 선입선출 -> First In First Out(FIFO)
+
+    *** 클래스 : 하나 이상의 공통된 특징을 가진 객체를 묶어 놓은 집합
+                    Member_Ex.java   Board_Ex.java
+    *** 캡슐화 : 외부에서 객체로 접근(다른 클래스에서)할 때 정보를 숨기고 특정 연산을 통해서만 접근이 가능하게
+    *** 객체 : 실세계에 존재하는 것을 프로그램으로 표시해 놓은 것
+    *** 다형성 : 상위 객체에서 물려 받은 하위 객체들이 다른 형태의 특성을 갖는 객체로 이용될 수 있는 것
+                     (부모)                          (자식)        
+                    List                          = ArrayList
+                    List                          = Vector    
+
+  ** byte(1) -> char(2) -> int(4) -> long(8)
+     float(4) -> double(8)
+
+
+  컴퓨터 : 반드시, ~만
+
+  *** 데이터베이스 
+  테이블, 뷰, 인덱스를 제거하는 명령어로 옳은 것은?  drop
+  View : 보안(수정,입력,삭제) : 논리적인 테이블
+  인덱스 : 속도를 빠르게 하려고(primary key : 자동으로 인덱스 설정)
+
+  *** SSO : Single Sign On
+   1. 로그인 한번 후 -> 다른 프로그램으로 이동을 해도 계속 로그인
+   2. 세션(session : 연결)
+
+    웹 페이지는 기본적으로 한 페이지에만 로그인이 되는데 연결 정보를 이용해야
+    다른 페이지에도 로그인 정보가 나타남
+
+
+
+  ** 프로그래밍<-  middleware  ->입출력(I/O)
+     - 응용소프트웨어(프로그램언어) 사이에서 작업을 편리하게 해 주는 도구
+     - 프로그래밍에 미들웨어를 여러 등록하고 사용할 수 있음
+     - 어떻게 만들어져 있는 코드 확인은 어렵다.
+
+
+  ** DRM(디지털 저작권 관리 기술) = 워터마크
+     - 콘텐츠 관려 암호화 및 키 관리
+     - 콘텐츠 식별 체계
+     - 콘텐츠 오류 감지 및 복구
+
+ ** XSS : 스크립트 삽입 공격
+     html 안에 input 또는 url 주소에 스크립트 태그(<script></script>)를 삽입해
+     인터넷 취약점을 공격하는 정보 유출 및 공격 방법
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
