@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+
+      section:nth-child(odd) {
+        background-color: #f8f8f8;
+      }
+
+      article {
+        margin: 0 auto;
+        max-width: 1600px;
+        padding: 10rem 0;
+      }
+
+      .content-2 {
+        /* 반응형 처리할 때 화면 크기 설정하는 방법 : 화면이 줄어 들더라도 화면은 무조건 100%로 사용하겠다 */
+        max-width: 100%;
+
+        display: flex;
+        justify-content: space-between;
+
+        /* 브라우저 화면 크기가 내용물 4개의 크기보다 작지면 내용물을 2개 2줄로 만든다 */
+        flex-wrap: wrap;
+
+        /* flex에서 사용하는 좌우 아래 위 여백 주는 방법 */
+        gap: 2%;
+      }
+
+      .content-2 .box {
+        /* flex에서 사용하는 넓이 주는 방법 */
+        flex-basis: 48%;
+      }
+
+      .content-2-title h1 {
+        font-size: 2.5rem;
+        /* 1.25rem = 20px / 16; */
+        margin-bottom: 1.25rem;
+      }
+
+      .content-2 p {
+        font-size: 1.25rem;
+        text-align: justify;
+        color: rgba(0, 0, 0, 0.7);
+        line-height: 1.5;
+      }
+
+      .content-2 .box img {
+        width: 100%;
+
+        /* 세로 모양 사진을 넣으면 height 사용 가능한데 가로 사진은 */
+        height: 100%;
+      }
+
+      .content-4 {
+        /* 반응형 처리할 때 화면 크기 설정하는 방법 : 화면이 줄어 들더라도 화면은 무조건 100%로 사용하겠다 */
+        max-width: 100%;
+
+        display: flex;
+        justify-content: space-between;
+
+        /* 브라우저 화면 크기가 내용물 4개의 크기보다 작지면 내용물을 2개 2줄로 만든다 */
+        flex-wrap: wrap;
+
+        /* flex에서 사용하는 좌우 아래 위 여백 주는 방법 */
+        gap: 0.25%;
+      }
+
+      .content-4-title h1 {
+        /* 3rem = 48 / 16 */
+        font-size: 3rem;
+        text-align: center;
+
+        /* 2.5rem = 32px / 16; */
+        margin-bottom: 2rem;
+      }
+
+      .content-4 .box {
+        /* flex에서 사용하는 넓이 주는 방법 */
+        flex-basis: 24.75%;
+      }
+
+      .content-4 .box img {
+        width: 100%;
+      }
+
+      @media screen and (max-width: 1200px) {
+        article {
+          padding: 100px 10px;
+        }
+
+        .content-2-title h1 {
+          text-align: center;
+        }
+
+        .content-2 .box {
+          flex-basis: 99.5%;
+        }
+
+        .content-2 .box img {
+          padding-top: 20px;
+        }
+
+        .content-4 .box {
+          flex-basis: 49.75%;
+        }
+      }
+
+      @media screen and (max-width: 765px) {
+        article {
+          padding: 80px 10px;
+        }
+
+        .content-2 .box img {
+          padding-top: 20px;
+        }
+
+        .content-4-title h1 {
+          font-size: 2.5rem;
+        }
+
+        .content-4 .box {
+          flex-basis: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <article>
+        <div class="content-2">
+          <div class="box">
+            <div class="content-2-title">
+              <h1>KOREA IT ACADEMY</h1>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex
+              consectetur dignissimos in voluptates ratione corporis ullam
+              dolor, labore deleniti excepturi quo cumque autem numquam beatae?
+              Error, quis natus! Sed praesentium quae cumque, cupiditate
+              adipisci nam perferendis magni, fugit beatae doloribus vitae. Ea
+              iure cumque inventore architecto eos fugit, eaque voluptates! Ad
+              magni officia adipisci optio eius aliquid consectetur, deleniti
+              commodi labore distinctio! Dolorum sunt nihil deleniti qui sint,
+              ut aperiam, nobis necessitatibus doloribus sequi commodi ab
+              provident autem asperiores dolore distinctio? Recusandae nesciunt,
+              soluta provident iure dolore molestias? Earum impedit magnam illo,
+              exercitationem vel aliquam, debitis vero ad voluptatum,
+              repellendus beatae consequuntur reiciendis dignissimos. Vero
+              cumque cum alias eveniet, veniam laudantium magni qui animi
+              tempora dolore itaque optio, dolorum a nesciunt adipisci rerum eos
+              officia sunt est quidem maiores ducimus. Modi quasi ipsum ducimus
+              doloribus nemo quisquam saepe, aliquid quibusdam hic error quidem,
+              cumque molestias accusantium temporibus corrupti at magnam.
+              Officia saepe minus quaerat atque earum. Officiis ipsa, omnis
+              cupiditate ullam consectetur iste nulla fugit ipsam commodi
+              accusantium nemo doloremque, cum veniam est similique explicabo
+              dolorum impedit reiciendis ut tenetur dolorem nobis ex? Placeat
+              quis eligendi maxime facere minima voluptatem molestiae impedit
+              itaque neque laboriosam ratione deserunt veniam, obcaecati vitae,
+              est odio eius id quasi debitis nesciunt possimus, laudantium ut.
+              Sint molestiae officia quam. Cupiditate ducimus commodi, deserunt
+              ipsa dignissimos temporibus voluptatum, sit iste perspiciatis
+              explicabo at esse doloremque hic omnis perferendis corporis,
+              possimus tenetur est quam fugiat illo. Voluptatibus cum possimus
+              numquam culpa soluta nesciunt! Laboriosam eius quasi autem.
+            </p>
+          </div>
+          <div class="box">
+            <img src="images/m1.jpg" alt="" />
+          </div>
+        </div>
+      </article>
+    </section>
+    <section>
+      <article>
+        <div class="content-4-title">
+          <h1>KOREA IT ACADEMY</h1>
+        </div>
+        <div class="content-4">
+          <div class="box">
+            <img src="images/f1.jpg" alt="" />
+          </div>
+          <div class="box">
+            <img src="images/f2.jpg" alt="" />
+          </div>
+          <div class="box">
+            <img src="images/f3.jpg" alt="" />
+          </div>
+          <div class="box">
+            <img src="images/f4.jpg" alt="" />
+          </div>
+          <div class="box">
+            <img src="images/f1.jpg" alt="" />
+          </div>
+          <div class="box">
+            <img src="images/f2.jpg" alt="" />
+          </div>
+          <div class="box">
+            <img src="images/f3.jpg" alt="" />
+          </div>
+          <div class="box">
+            <img src="images/f4.jpg" alt="" />
+          </div>
+        </div>
+      </article>
+    </section>
+  </body>
+</html>
