@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>사원 등록 페이지</title>
+</head>
+<body>
+
+    <a href="/employees/list">사원 목록 보기</a>
+
+    <form method="post"
+          action="/employees/register"
+          name="frm"
+          onsubmit="return frmCheck()">
+
+        <label>부서</label>
+        <select class="sel" name="dept">
+
+        </select><br />
+
+        <label>이메일</label>
+        <input type="text" name="email" class="umail"><br />
+
+        <label>비밀번호</label>
+        <input type="password" name="passwd" class="upwd"><br />
+
+        <input type="submit" value="사원가입" class="btn">
+
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script>
+
+        let sel = document.querySelector(".sel");
+
+        $(document).ready(function(){
+            $.ajax({
+                type: 'get',
+                url : '/employees/dept',
+                dataType: 'json',
+                success: function(data) {
+
+                    let output = "";
+                    data.forEach( (d) => {
+                        output += `<option value=${d.korBuseoCode}>${d.korBuseoName}</option>`;
+                    } );
+
+                    sel.innerHTML = output;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
