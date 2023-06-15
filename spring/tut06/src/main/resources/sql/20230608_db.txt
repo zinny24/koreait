@@ -1,0 +1,74 @@
+부서명
+create table kor_buseo(
+  kor_buseo_code varchar(10),
+  kor_buseo_name varchar(50),
+  primary key(kor_buseo_code)
+);
+
+INSERT INTO kor_buseo VALUES('100', 'Human Resource Dept');
+INSERT INTO kor_buseo VALUES('200', 'Secretary Office');
+INSERT INTO kor_buseo VALUES('300', 'Sales Dept');
+INSERT INTO kor_buseo VALUES('900', 'Executive Office');
+
+
+직책
+create table kor_position(
+  kor_pos_code varchar(10),
+  kor_pos_name varchar(100),
+  kor_buseo_code varchar(10),
+  primary key(kor_pos_code),
+  foreign key(kor_buseo_code) references kor_buseo(kor_buseo_code) ON UPDATE CASCADE ON DELETE Restrict
+);
+
+INSERT INTO kor_position VALUES('001', 'Head of HRD', '100');
+INSERT INTO kor_position VALUES('002', 'Team Leader', '100');
+INSERT INTO kor_position VALUES('003', 'Staff', '100');
+
+INSERT INTO kor_position VALUES('004', 'Headquater Manager', '200');
+INSERT INTO kor_position VALUES('005', 'General Manager', '200');
+INSERT INTO kor_position VALUES('006', 'Assistant Manager', '200');
+INSERT INTO kor_position VALUES('007', 'Staff', '200');
+
+INSERT INTO kor_position VALUES('008', 'Branch Manager', '300');
+INSERT INTO kor_position VALUES('009', 'Office Manager', '300');
+
+INSERT INTO kor_position VALUES('010', 'Chief Executive Officer', '900');
+INSERT INTO kor_position VALUES('011', 'Chief Technology Officer', '900');
+INSERT INTO kor_position VALUES('012', 'Chief Financial Officer', '900');
+
+사원
+create table kor_employees(
+  kor_emp_id int not null auto_increment,
+  kor_emp_email varchar(100) unique,
+  kor_emp_passwd varchar(100) not null,
+  kor_emp_name varchar(20) not null,
+  kor_emp_gender enum('M', 'F'),
+  kor_emp_buseo varchar(10),
+  kor_emp_pos varchar(100),
+  kor_emp_grade int default 0,
+  kor_emp_created datetime default now(),
+  kor_emp_modified datetime default now(),
+  primary key(kor_emp_id),
+  foreign key(kor_emp_buseo) references kor_buseo(kor_buseo_code)  ON UPDATE CASCADE ON DELETE RESTRICT,
+  foreign key(kor_emp_pos) references kor_position(kor_pos_code)  ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
