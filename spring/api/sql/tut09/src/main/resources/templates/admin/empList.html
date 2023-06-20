@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>사원목록(관리자)</title>
+</head>
+<body>
+    <a href="/emp/register">사원가입</a>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>부서</th>
+            <th>이메일</th>
+            <th>이름</th>
+            <th>가입일</th>
+            <th>비고</th>
+        </tr>
+        <tbody>
+        <div th:if = "${employees.isEmpty()}">
+            <tr>
+                <td colspan="6">등록된 사원이 없습니다</td>
+            </tr>
+        </div>
+        <div th:unless = "${employees.isEmpty()}" >
+            <tr th:each="person: ${employees}">
+                <td>[[${person.id}]]</td>
+                <td>[[${person.dept}]]</td>
+                <td>[[${person.email}]]</td>
+                <td>[[${person.username}]]</td>
+                <td>[[${ #temporals.format(person.regdate, 'yyyy.MM.dd')   }]]</td>
+                <td>
+                    <a th:href="@{/emp/view/{id}(id=${person.id})}">
+                        보기
+                    </a>
+                    <a th:href="@{/emp/edit/{id}(id=${person.id})}">
+                        수정
+                    </a>
+                    <a th:href="@{/emp/delete/{id}(id=${person.id})}">
+                        삭제
+                    </a>
+                </td>
+            </tr>
+        </div>
+        </tbody>
+        </thead>
+    </table>
+</body>
+</html>
+
+
+
+
+
+
+
+
