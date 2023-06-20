@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사원 등록 페이지</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="tbl-wrap">
+        <a href="/emp/list">사원목록</a>
+        <form action="/emp/insert" method="post">
+
+            <label>이메일</label>
+            <input type="text" name="empEmail" required /><br />
+
+            <label>비밀번호</label>
+            <input type="password" name="empPasswd" required /><br />
+
+            <label>이름</label>
+            <input type="text" name="empName" required /><br />
+
+            <input type="submit" value="사원가입">
+        </form>
+    </div>
+</body>
+</html>
