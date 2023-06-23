@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>사원 가입 페이지</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>사원 가입 페이지</h1>
+        <label>부서명</label>
+        <select name="selDept" class="selDept"></select>
+        <label>이메일</label>
+        <input type="text" name="email" class="email" />
+        <label>비밀번호</label>
+        <input type="password" name="passwd" class="passwd">
+        <button onclick="saveEmp()">사원등록</button>
+
+    <script>
+        let selDept = document.querySelector(".selDept");
+        $(document).ready(function() {
+            $.ajax({
+                    type: "get",
+                    url : "/emp/getDept",
+                    dataType: "json",
+                    success: function(result) {
+                        let output = "<option>부서를 선택하세요</option>";
+                        result.forEach( (r) => {
+                            output += `<option value=${r.buseoCode}>${r.buseoName}</option>`;
+                        });
+
+                        selDept.innerHTML = output;
+                    },
+                    error: function(err) {
+                    }
+                });
+            });
+
+
+            function saveEmp() {
+                let selDept = document.querySelector(".selDept").value;
+                let email   = document.querySelector(".email").value;
+                let passwd  = document.querySelector(".passwd").value;
+
+                let obj = {
+                    selDept,
+                    email,
+                    passwd
+                };
+                console.log(obj);
+
+                $.ajax({
+                    type: "post",
+                    url : "/emp/register",
+                    dataType: "json",
+                    data: obj,
+                    success: function(res) {
+                        if( res.status ==  200 ) {
+                            alert("사원 등록이 되었습니다.");
+                            location.href = "/emp/list";
+                        }
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            }
+
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+

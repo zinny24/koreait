@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>사원 전체 목록</title>
+</head>
+<body>
+    <a href="/emp/register">사원등록</a><br />
+    <span>전체 사원 수 : [[${cnt}]] 명</span>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>부서</th>
+            <th>이메일</th>
+            <th>비밀번호</th>
+            <th>가입일</th>
+            <th>비고</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee: ${emp}">
+                <td>[[${employee.id}]]</td>
+                <td>[[${employee.selDept}]]</td>
+                <td>[[${employee.email}]]</td>
+                <td>[[${employee.passwd}]]</td>
+                <td>[[${employee.regdate}]]</td>
+                <td>
+                    <a href="">삭제</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
