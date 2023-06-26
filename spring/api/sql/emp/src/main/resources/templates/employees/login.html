@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 페이지</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>세션(연결정보)을 이용한 로그인</h1>
+    <form action="/emp/login" method="post">
+        <label>이메일</label>
+        <input type="text" name="email" required /><br />
+
+        <label>비밀번호</label>
+        <input type="password" name="passwd" required /><br />
+
+        <input type="submit" value="로그인">
+    </form>
+
+    <p>
+        <a href="/emp/register">사원 가입 페이지</a>
+    </p>
+</body>
+</html>
+
+
+
+
+
+
+
