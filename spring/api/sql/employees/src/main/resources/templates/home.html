@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>코리아아이티 아카데미에 오신 것을 환영합니다.</title>
+    <link rel="stylesheet" th:href="@{/css/common.css?after}">
+    <style>
+        .header-top {
+            background-color: #1e2e43;
+            padding: 15px 0;
+            color:#fff;
+            text-align:center;
+        }
+
+        .header-size {
+            width: 1600px;
+            margin:0 auto;
+        }
+
+        .header-bottom {
+            background-color: #fff;
+            padding:25px 0;
+            box-shadow: 0 10px 5px rgba(0, 0, 0, 0.25), 0 10px 5px rgba(0 ,0 ,0, 0.22);
+        }
+
+        .header-menu-flex {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        ul {
+            display:flex;
+        }
+
+        ul li {
+            list-style:none;
+            margin-left: 50px;
+        }
+
+        footer {
+            position:fixed;
+            bottom:0;
+            left:0;
+            width:100%;
+            background-color: #1e2e43;
+            color:#fff;
+            padding: 20px 0;
+        }
+
+        footer p {
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="header-size">[[${web.korWebAdv}]]</div>
+        </div>
+        <div class="header-bottom">
+            <div class="header-size">
+                <div class="header-menu-flex">
+                    <div class="logo">로고</div>
+                    <div class="menu">
+                        <ul>
+                            <li th:each="menu: ${#strings.arraySplit(web.korWebMenus, ';')}">
+                                <a href="">[[${menu}]]</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <a href="/main/register">사원가입</a>
+        <a href="/main/login">로그인</a>
+    </main>
+    <footer>
+        <p>[[${web.korWebCopyright}]]</p>
+    </footer>
+</body>
+</html>
