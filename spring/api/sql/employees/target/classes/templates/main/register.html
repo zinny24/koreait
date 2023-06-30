@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코리아아이티아카데미 > 사원 등록 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/common.css?after}">
+    <link rel="stylesheet" th:href="@{/css/register.css?after}">
+    <script th:src="@{/js/jquery.js}"></script>
+</head>
+<body>
+    <div class="alert">
+        <p></p>
+    </div>
+    <div class="container">
+        <h1>코리아아이티 사원 관리시스템</h1>
+        <form>
+            <label>이메일<span id="chkPage" style="color:#f00"></span></label>
+            <input type="text" name="korEmpEmail" class="korEmpEmail" />
+            <label>비밀번호</label>
+            <input type="password" name="korEmpPasswd" class="korEmpPasswd" />
+            <label>비밀번호 확인</label>
+            <input type="password" name="korEmpPasswd2" class="korEmpPasswd2" />
+            <label>이름</label>
+            <input type="text" name="korEmpName" class="korEmpName" />
+            <label>성별</label>
+            <input type="radio" name="korEmpGender" class="korEmpGender" value="M"> <span>남자</span>
+            <input type="radio" name="korEmpGender" class="korEmpGender" value="W" checked> <span>여자</span>
+            <div class="selWrap">
+                <div class="selBox">
+                    <label>부서</label>
+                    <select name="korEmpDept" class="korEmpDept" id="selDept" onchange="getPos()"></select>
+                </div>
+                <div class="selBox">
+                    <label>직책</label>
+                    <select name="korEmpPos" class="korEmpPos" id="selPos"></select>
+                </div>
+            </div>
+            <div class="btn-wrap">
+                <button type="button" id="reg">REGISTER</button>
+            </div>
+            <p>
+                <a href=""><strong>로그인 페이지로 이동</strong></a>
+            </p>
+        </form>
+    </div>
+    <script th:src="@{/js/register.js}"></script>
+</body>
+</html>
