@@ -1,0 +1,32 @@
+@charset 'utf-8';
+
+h2 {
+    margin-bottom: 5px;
+}
+
+table thead tr {
+    background-color: #0b5ed7;
+    color:#fff;
+    height: 45px;
+}
+
+table thead tr th {
+    width:50%;
+}
+
+table tbody tr {
+    height: 45px;
+}
+
+.dept p {
+    padding: 10px 5px;
+}
+
+.tag {
+    font-size: 12px;
+    cursor:pointer;
+    background-color: tomato;
+    color:#fff;
+    padding: 4px 6px 3px 6px;
+    border-radius: 2px;
+}
