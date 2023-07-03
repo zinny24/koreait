@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="left-myinfo" th:fragment="lefts">
+    <img th:src="@{/images/nobody.png}" alt="사원사진">
+    <div>
+        <p>이메일 : [[${session.emp.korEmpEmail}]]</p>
+        <p>사원명 : [[${session.emp.korEmpName}]]</p>
+        <p>사원등급 : Level [[${session.emp.korEmpLevel}]]</p>
+        <p>
+            <a href="/main/logout">로그아웃</a>
+        </p>
+    </div>
+</div>
+</body>
+</html>
