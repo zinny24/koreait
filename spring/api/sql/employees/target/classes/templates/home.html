@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/css/common.css?after}">
+    <style>
+        .util {
+            background-color:#296647;
+            padding: 18px 0;
+        }
+
+        .wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .util-wrap, .nav-wrap {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .util-wrap p, .nav-wrap p {
+            flex-basis: 25%;
+            text-align:center;
+        }
+
+        .nav-wrap h2 {
+            flex-basis: 30%;
+            text-align:center;
+        }
+
+        .util-wrap p a {
+            color:#fff;
+            text-decoration: underline;
+            font-size: 18px;
+        }
+
+        .nav-top {
+            padding: 40px 0;
+        }
+
+        .nav-top .social a {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        .nav-top .social a:hover {
+            color:tomato;
+            transition: 0.3s;
+        }
+
+        .nav-top .shop a {
+            font-size:24px;
+            margin-left: 25px;
+        }
+
+        .pos-bag {
+            position:relative;
+        }
+
+        .tag {
+            position:absolute;
+            top:-20px;
+            right:-14px;
+            background-color: rgba(41, 102, 71, 0.8);
+            color:#fff;
+            width:25px;
+            height:25px;
+            border-radius: 50%;
+            display:inline-block;
+            font-size:14px;
+            text-align:center;
+            line-height: 2;
+        }
+
+        .nav-bottom nav {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="util">
+            <div class="wrapper">
+                <div class="util-wrap">
+                    <p><a href="">이벤트1</a></p>
+                    <p><a href="">이벤트2</a></p>
+                    <p><a href="">이벤트3</a></p>
+                </div>
+            </div>            
+        </div>
+        <div class="navigator">
+            <div class="wrapper">
+                <div class="nav-top">
+                    <div class="nav-wrap">
+                        <p class="social">
+                            <a href=""><i class="fa-brands fa-instagram"></i></a>
+                            <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href=""><i class="fa-brands fa-twitter"></i></a>
+                            <a href=""><i class="fa-brands fa-youtube"></i></a>
+                        </p>
+                        <h2>
+                            <a href="">
+                                코리아아이티 아카데미
+                            </a>
+                        </h2>
+                        <p class="shop">
+                            <a href=""><i class="fa-solid fa-user"></i></a>
+                            <span class="pos-bag">
+                                <a href="">
+                                    <i class="fa-solid fa-bag-shopping"></i>
+                                    <span class="tag">3</span>
+                                </a>
+                            </span>
+                            
+                        </p>
+                    </div>
+                </div>
+                <div class="nav-bottom">
+                    <nav>Menus</nav>
+                </div>
+            </div>
+        </div>
+    </header>
+</body>
+</html>
