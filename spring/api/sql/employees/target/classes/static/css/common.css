@@ -1,0 +1,39 @@
+@charset 'utf-8';
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Gothic A1', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #222;
+}
+
+
+
+table {
+    border-collapse: collapse;
+    width:100%;
+}
+
+/* hr */
+
+hr {
+    border:0;
+    border-top:1px solid #e7e7e7;
+}
+
+
+
+
+
+
+
+
