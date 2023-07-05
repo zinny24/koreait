@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 페이지 > 사원 관리 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/common.css?after}">
+    <link rel="stylesheet" th:href="@{/css/admin.css?after}">
+    <link rel="stylesheet" th:href="@{/css/employees.css?after}">
+</head>
+<body>
+    <div class="container" th:if="${session.emp != null}">
+        <header th:insert="~{fragment/header::headers}"></header>
+        <main>
+            <div class="main-wrap">
+                <div class="main-left" th:insert="~{fragment/left::lefts}"></div>
+                <div class="main-right">
+                    <div class="main-emp">
+                        <h2>:: KOREAIT EMPLOYEES LIST</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>사번</th>
+                                    <th>사진</th>
+                                    <th>부서/직책/권한</th>
+                                    <th>이메일 주소</th>
+                                    <th>사원명</th>
+                                    <th>등록일</th>
+                                    <th>수정일</th>
+                                    <th>비고</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="emp : ${emp}">
+                                    <td th:text="${emp.korEmpId}"></td>
+                                    <td>사진</td>
+                                    <td>
+                                        <select id="selDept">
+                                            <option value="100">인사과</option>
+                                        </select>
+                                        <select id="selPos">
+                                            <option value="101">인사과장</option>
+                                        </select>
+                                        <select id="selLevel">
+                                            <option value="7">Level 7</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <a href="">
+                                            <strong>
+                                                <u>[[${emp.korEmpEmail}]]</u>
+                                            </strong>
+                                        </a>
+                                    </td>
+                                    <td>[[${emp.korEmpName}]]</td>
+                                    <td>[[${  #temporals.format(emp.korEmpCreated, 'yyyy. MM. dd')   }]]</td>
+                                    <td>[[${  #temporals.format(emp.korEmpModified, 'yyyy-MM-dd')  }]]</td>
+                                    <td>
+                                        <a href="">
+                                            <button class="btn clr1">
+                                                상세보기
+                                            </button>
+                                        </a>
+                                        <a href="">
+                                            <button class="btn clr2">
+                                                정보수정
+                                            </button>
+                                        </a>
+                                        <a href="">
+                                            <button class="btn clr3">
+                                                정보삭제
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div th:unless="${session.emp != null}">
+        <script>
+            location.href = "/main/login";
+        </script>
+    </div>
+</body>
+</html>

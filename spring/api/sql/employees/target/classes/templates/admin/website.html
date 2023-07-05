@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 페이지 > 페이지 관리</title>
+    <link rel="stylesheet" th:href="@{/css/common.css?after}">
+    <link rel="stylesheet" th:href="@{/css/admin.css?after}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <style>
+        .page {
+            width: 600px;
+            padding: 20px;
+            margin-top:10px;
+        }
+
+        input {
+            border:1px solid #c7c7c7;
+            padding: 12px 8px;
+            font-size:18px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            border:1px solid #c7c7c7;
+            padding: 12px 8px;
+            width:100%;
+            height:200px;
+            font-size:18px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" th:if="${session.emp != null}">
+    <header th:insert="~{fragment/header::headers}"></header>
+    <main>
+        <div class="main-wrap">
+            <div class="main-left" th:insert="~{fragment/left::lefts}"></div>
+            <div class="main-right">
+                <h2>:: EMPLOYEES PAGE MANAGEMENT</h2>
+                <div class="page">
+                    <form method="post">
+                        <label>1. 웹사이트 로고 이미지 관리</label>
+                        <input type="file" name="korWebLogo" id="attach" /><span>업로드 파일의 사이즈는 가로 120px, 세로 40px로 업로드 하셔야 합니다.</span><br />
+                        <span style="color:#f00" class="mb-20">
+                            <div th:if="${not #strings.isEmpty(web.korWebLogo)}">
+                                <img th:src="@{../../upload/} + ${web.korWebLogo}">
+                            </div>
+                            <div th:unless="${not #strings.isEmpty(web.korWebLogo)}">
+                                업로드 된 이미지가 없습니다.
+                            </div>
+                        </span><br />
+                        <input type="checkbox" value="Y"> 이미지 변경를 변경하시려면 체크하세요.<br />
+
+                        <label>2. 웹사이트 타이틀 관리</label>
+                        <input type="text" class="mb-20" name="korWebTitle" th:value="${web.korWebTitle}" style="width:100%" /><br />
+
+                        <label>3. 웹사이트 메뉴 관리</label>
+                        <input type="text" name="korWebMenus" th:value="${web.korWebMenus}" style="width:100%" /><br />
+                        <p style="color:#f00" class="mb-20">메뉴는 세미콜론(;)으로 구분하셔야 합니다.</p>
+
+                        <label>4. 웹사이트 메뉴 주소 관리</label>
+                        <input type="text" name="korWebUrl" th:value="${web.korWebUrl}" style="width:100%" /><br />
+                        <p style="color:#f00" class="mb-20">메뉴는 세미콜론(;)으로 구분하셔야 합니다.</p>
+
+                        <label>5. 웹사이트 카피라이터 관리</label>
+                        <input class="mb-20" type="text" name="korWebCopyright"  th:value="${web.korWebCopyright}" style="width:100%"/><br />
+
+                        <label>6. 웹사이트 약관 관리</label><br />
+                        <textarea class="mb-20" name="korWebTerm">[[${web.korWebTerm}]]</textarea><br />
+
+                        <button type="button" onclick="saveWebsite()">내용 저장</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+
+<script>
+    function saveWebsite() {
+         let korWebTitle = document.querySelector("input[name='korWebTitle']").value;
+         let korWebMenus = document.querySelector("input[name='korWebMenus']").value;
+         let korWebUrl = document.querySelector("input[name='korWebUrl']").value;
+         let korWebCopyright = document.querySelector("input[name='korWebCopyright']").value;
+         let korWebTerm = document.querySelector("textarea[name='korWebTerm']").value;
+
+         let frmData = new FormData();
+
+         frmData.append("uploadFile", $("#attach")[0].files[0]         );
+         frmData.append("korWebTitle", korWebTitle);
+         frmData.append("korWebMenus", korWebMenus)
+         frmData.append("korWebUrl", korWebUrl);
+         frmData.append("korWebCopyright", korWebCopyright);
+         frmData.append("korWebTerm", korWebTerm);
+
+         $.ajax({
+            type: "post",
+            url : "/admin/website",
+            encType: "multipart/form-data",
+            data: frmData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function( res ) {
+                if( res.msg == "success" ) {
+                    alert("페이지 정보가 변경 되었습니다.");
+                    location.reload();
+                }
+            },
+            error: function( err ) {
+                console.log(err);
+            }
+         });
+
+    }
+</script>
+
+
+<div th:unless="${session.emp != null}">
+    <script>
+            location.href = "/main/login";
+        </script>
+</div>
+</body>
+</html>

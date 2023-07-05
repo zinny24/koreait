@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코리아아이티아카데미 > 사원 로그인 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/common.css?after}">
+    <link rel="stylesheet" th:href="@{/css/register.css?after}">
+    <script th:src="@{/js/jquery.js}"></script>
+</head>
+<body>
+    <div class="alert">
+        <p></p>
+    </div>
+    <div class="container">
+        <h1>코리아아이티 사원 관리시스템</h1>
+        <form method="post" action="/main/login" onsubmit="return frmCheck()">
+            <label>이메일<span id="chkPage" style="color:#f00"></span></label>
+            <input type="text" name="korEmpEmail" class="korEmpEmail" autofocus />
+            <label>비밀번호</label>
+            <input type="password" name="korEmpPasswd" class="korEmpPasswd" />
+
+            <div class="btn-wrap">
+                <button type="submit" id="login">LOGIN</button>
+            </div>
+            <p>
+                <a href="/main/register"><strong>사원 등록 페이지로 이동</strong></a>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        function frmCheck() {
+            let korEmpEmail     = $(".korEmpEmail");
+            let korEmpPasswd    = $(".korEmpPasswd");
+
+            if( !korEmpEmail.val() ) {
+                alert("이메일을 입력해 주세요.");
+                korEmpEmail.focus();
+                return false;
+            }
+
+            if( !korEmpPasswd.val() ) {
+                alert("비밀번호를 입력해 주세요.");
+                korEmpPasswd.focus();
+                return false;
+            }
+
+        }
+    </script>
+
+</body>
+</html>
