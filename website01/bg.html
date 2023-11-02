@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero 이미지 만들기</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            background-image: url(./images/bg.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            width: 100%;
+            height: 450px;
+        }
+
+        .hero-screen-pos {
+            background-color: rgba(0, 0, 0, 0.4);
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+
+            display: flex;
+            justify-content: end;
+        }
+
+        .hero-content {
+            background-color: rgba(255, 255, 255, 0.6);
+            width: 50%;
+            padding: 30px 40px;
+        }
+
+        .hero-content h1 {
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            line-height: 1.5;
+            color: rgba(0, 0, 0, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .btn-container button {
+            border: 0;
+            background-color: rgba(255, 255, 255, 0.3);
+            border: 1px solid #fff;
+            color: #333;
+            font-weight: bold;
+            padding: 10px 12px;
+            font-size: 14px;
+        }
+
+        .btn-container button:hover {
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: .8s;
+            cursor: pointer;
+        }
+
+        @media (max-width:800px) {
+            .container {
+                height: 500px;
+            }
+
+
+            .hero-container {
+                max-width: 100%;
+                justify-content: center;
+            }
+
+            .hero-content {
+                width: 100%;
+                margin: 0 20px;
+            }
+
+            .hero-content h1 {
+                text-align: center;
+                font-size: 40px;
+            }
+
+            .btn-container {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="hero-screen-pos">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Title</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, cum! Voluptate dolorum provident
+                        amet quisquam molestiae id commodi voluptatum. Quisquam.</p>
+                    <div class="btn-container">
+                        <button>SHOW VIEW</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
