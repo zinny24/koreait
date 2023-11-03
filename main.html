@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Main</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <style>
+        header {
+            background-color: #245de7;
+            height: 450px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .bg-wrap {
+            display: flex;
+            align-items: center;
+            height: 450px;
+        }
+
+        .bg-content {
+            color: #fff;
+            width: 50%;
+        }
+
+        .bg-content h1 {
+            font-size: 50px;
+        }
+
+        .bg-content p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .box-wrap {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .box {
+            background-color: #245de7;
+            color: #fff;
+            padding: 20px;
+            width: 415px;
+        }
+
+        .box h2 {
+            margin-bottom: 10px;
+        }
+
+        .box p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        @media (max-width: 800px) {
+            header {
+                height: 600px;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .bg-wrap {
+                justify-content: center;
+                height: 600px;
+            }
+
+            .bg-content {
+                width: 100%;
+                text-align: center;
+                margin: 0 20px;
+            }
+
+            .bg-content h1 {
+                font-size: 60px;
+            }
+
+            .box-wrap {
+                display: block;
+            }
+
+            .box {
+                width: 100%;
+            }
+
+            .box:nth-child(2) {
+                margin: 10px 0;
+            }
+
+            section {
+                padding: 20px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="bg-wrap">
+                <div class="bg-content">
+                    <h1>Korea IT Academy</h1>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero minus reiciendis eum ad, expedita
+                        ab tempore? Debitis nemo aperiam nulla?</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section>
+                <div class="box-wrap">
+                    <div class="box">
+                        <h2>Spring Framework</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium nesciunt, at vero dicta
+                            soluta blanditiis.</p>
+                    </div>
+                    <div class="box">
+                        <h2>FrontEnd Design</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium nesciunt, at vero dicta
+                            soluta blanditiis.</p>
+                    </div>
+                    <div class="box">
+                        <h2>Javascript Library</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium nesciunt, at vero dicta
+                            soluta blanditiis.</p>
+                    </div>
+                </div>
+            </section>
+        </div>`
+    </main>
+</body>
+
+</html>
