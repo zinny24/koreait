@@ -1,0 +1,91 @@
+1. 계정 생성
+create user shop identified by 1234;
+
+grant connect, resource, dba to shop;
+
+
+show user; 
+
+connect shop/1234;
+
+system에서 드롭 
+
+----------------------------------------
+
+select * from tab; 테이블 보기
+
+
+select * from usertbl where rownum >= 1;
+select * from usertbl where rownum >= 1 and rownum <= 10; -- mysql limit 0, 10
+
+drop user shop;
+
+2. view
+create view shop.memberTBL_view as
+select memberName, memberAddr from shop.memberTBL;
+
+3. backup
+exp userid=sott/tiger@orcl OWNER=shop FILE=c:\db\shop01.dmp
+
+4. import
+imp userid=scott/tiger@orcl FROMUSER=shop TOUSER=shop OWNER=shop FILE=C:\db\shop01.dmp
+
+--------------------------------------------
+1. create table myTBL(
+userid varchar2(20),
+passwd varchar(20
+);
+
+
+
+insert into myTBL values('','');
+
+COMMIT;
+
+SELECT * FROM myTBL;
+
+
+2. pk, fk
+create table userTBL(
+id number(8) not null primary key, -- 사용자 pk
+userid varchar2(20),
+username varchar2(10),
+passwd varchar2(20),
+uDate Date
+);
+
+
+create table buyTBL(
+id number(8) not null primary key,
+productName varchar2(10) not null,
+price number(8) not null,
+amount number(3) not null,
+foreign key(id) references userTBL(id)
+);
+
+idSEQ는 변수 이름
+create sequence idQ;
+insert into userTBL values(idQ.NEXTVAL, 'busan','홍길동','1234','2020-08-08');
+
+insert into buyTBL values(idSEQ.NEXTVAL, 'books', 1000, 10);
+
+commit;
+
+
+select productName from buyTBL
+where price > ( select price from buyTBL where productName  = 'books');
+
+select productName from buyTBL
+where price >= any ( select price from buyTBL where productName  = 'books');
+
+select productName from buyTBL
+where price = in( select price from buyTBL where productName  = 'books');
+
+
+select avg(amount) as 평균 FROM buyTBL;
+select avg(amount) as "평균 구매 개수" FROM buyTBL;
+
+
+select productName, sum(price) from userTBL; X
+
+select productName, sum(price) from userTBL group by productName;

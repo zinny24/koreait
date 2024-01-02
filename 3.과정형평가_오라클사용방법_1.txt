@@ -1,0 +1,469 @@
+-- create new user
+CREATE USER OT IDENTIFIED BY yourpassword;
+
+-- grant priviledges
+GRANT CONNECT, RESOURCE, DBA TO OT;
+
+
+1. sqlplus "/as sysdba" : admin 접속
+   또는 아이디 system 비밀번호는 설치할 때
+
+   - 기존에 oracle 설치 때 만들어져 있는 계정을 잠금 해제하여 사용할 때
+      alter user scott identified by tiger account unlock;
+      conn scott/tiger
+
+2. 사용자 새로 생성
+    - create user scott identified by tiger;
+    - grant connect, resource, dba to scott;
+
+    - alter user scott identified by 1234; 비밀번호 변경
+
+3. CREATE
+   - 컬럼 타입
+  CREATE TABLE purchase_orders (
+    po_nr NUMBER PRIMARY KEY,
+    vendor_id NUMBER NOT NULL,
+    po_status NUMBER(1,0) NOT NULL,
+    created_at TIMESTAMP NOT NULL 
+);
+
+   - 컬럼 타입 추가/수정/삭제
+
+   (2) 수정
+3.1) ALTER
+   - ALTER TABLE persons ADD birthdate DATE NOT NULL;
+   - ALTER TABLE table_name ADD (cphone VARCHAR(20), email VARCHAR(100));
+
+   - ALTER TABLE persons MODIFY birthdate DATE NULL;
+     - ALTER TABLE persons MODIFY(
+       phone VARCHAR2(20) NOT NULL,
+       email VARCHAR2(255) NOT NULL
+       );
+
+   - 컬럼 이름 바꾸기
+      - ALTER TABLE table_name RENAME COLUMN column_name TO new_name;
+        - ALTER TABLE persons RENAME COLUMN first_name TO forename;
+
+   - 테이블 이름 바꾸기
+      - ALTER TABLE table_name RENAME TO new_table_name;
+        - ALTER TABLE persons RENAME TO people;
+
+   - 컬럼 삭제
+      - ALTER TABLE table_name DROP COLUMN column_name;
+         - ALTER TABLE persons DROP COLUMN birthdate;
+         - ALTER TABLE persons DROP( email, phone );
+
+   
+
+3-1 PRIMARY KEY
+CREATE TABLE vendors (
+    vendor_id NUMBER primary key,
+    vendor_name VARCHAR2(255) NOT NULL,
+    address VARCHAR2(255) NOT NULL
+);
+
+create sequence v_id_seq increment by 1 start with 0 minvalue 0;
+
+CREATE TABLE suppliers (
+    supplier_id NUMBER primary key,
+    supplier_name VARCHAR2(255) NOT NULL,
+    FOREIGN KEY(supplier_id) REFERENCES vendors(vendor_id)
+);
+
+create sequence s_id_seq increment by 1 start with 0 minvalue 0;
+
+INSERT INTO vendors VALUES(v_id_seq.nextval, 'busan it', 'BUSAN METROPOLITAN');
+INSERT INTO suppliers VALUES(s_id_seq.nextval, 'ORACLE');
+
+3-2 Foreign Key
+
+-----------------------------------------------------------------------------------
+sequence
+
+create sequence rid_seq increment by 1 start with 0 minvalue 0;
+rid_seq.nextval
+
+CREATE TABLE regions
+  (
+    region_id NUMBER  PRIMARY KEY,
+    region_name VARCHAR2( 50 ) NOT NULL
+  );
+
+Insert into REGIONS (REGION_ID,REGION_NAME) values (rid_seq.nextval,'Europe');
+Insert into REGIONS (REGION_ID,REGION_NAME) values (rid_seq.nextval,'Americas');
+Insert into REGIONS (REGION_ID,REGION_NAME) values (rid_seq.nextval,'Asia');
+
+------------------------------------------------------------------------------------
+
+
+
+-----------------------------------------------------------------------------------
+
+
+3-3 UNIQUE : 중복은 허용하지 않지만 NULL 가능
+      PK 는 NOT NULL + UNIQUE
+
+CREATE TABLE clients (
+    client_id NUMBER ,
+    first_name VARCHAR2(50) NOT NULL,
+    last_name VARCHAR2(50) NOT NULL,
+    company_name VARCHAR2(255) NOT NULL,
+    email VARCHAR2(255) NOT NULL UNIQUE,
+    phone VARCHAR(25)
+);
+
+CREATE SEQUENCE c_id_seq increment by 1 start with 0 minvalue 0;
+
+INSERT INTO clients VALUES(c_id_seq.nextval, 'Christene', 'Snider','christene.snider@abc.com', 'ABC Inc', '408-875-6075');
+
+INSERT INTO clients VALUES(c_id_seq.nextval, 'Sherly', 'Snider', 'christene.snider@abc.com', 'ABC Inc', '408-875-6076'); //중복허용하지 않기에 에러난다
+---------------------------------------------------------------------------------------------------------------------
+3.3.1 check 입력 값을 지정할 때
+CREATE TABLE parts (
+    part_id NUMBER,
+    part_name VARCHAR2(255) NOT NULL,
+    buy_price NUMBER(9,2) CHECK(buy_price > 0),
+    PRIMARY KEY(part_id)
+);
+
+/* gender char(1) not null CHECK (GENDER IN('M', 'F')) */
+/* amount number not null CHECK(amount BETWEEN 0 AND 100), */ 
+
+INSERT INTO parts(part_name, buy_price)
+VALUES('HDD',0); error
+---------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE product_categories
+  (
+    category_id NUMBER PRIMARY KEY,
+    category_name VARCHAR2( 255 ) NOT NULL
+  );
+
+CREATE TABLE products
+  (
+    product_id NUMBER PRIMARY KEY,
+    product_name  VARCHAR2( 255 ) NOT NULL,
+    description   VARCHAR2( 2000 )        ,
+    standard_cost NUMBER( 9, 2 )          ,
+    list_price    NUMBER( 9, 2 )          ,
+    category_id   NUMBER NOT NULL         ,
+    CONSTRAINT fk_products_categories 
+      FOREIGN KEY( category_id )
+      REFERENCES product_categories( category_id )
+  );
+
+Insert into PRODUCT_CATEGORIES (CATEGORY_ID,CATEGORY_NAME) values (1,'CPU');
+Insert into PRODUCT_CATEGORIES (CATEGORY_ID,CATEGORY_NAME) values (2,'Video Card');
+Insert into PRODUCT_CATEGORIES (CATEGORY_ID,CATEGORY_NAME) values (3,'RAM');
+Insert into PRODUCT_CATEGORIES (CATEGORY_ID,CATEGORY_NAME) values (4,'Mother Board');
+Insert into PRODUCT_CATEGORIES (CATEGORY_ID,CATEGORY_NAME) values (5,'Storage');
+
+
+Insert into PRODUCTS (PRODUCT_ID,PRODUCT_NAME,DESCRIPTION,STANDARD_COST,LIST_PRICE,CATEGORY_ID) values (228,'Intel Xeon E5-2699 V3 (OEM/Tray)','Speed:2.3GHz,Cores:18,TDP:145W',2867.51,3410.46,1);
+Insert into PRODUCTS (PRODUCT_ID,PRODUCT_NAME,DESCRIPTION,STANDARD_COST,LIST_PRICE,CATEGORY_ID) values (248,'Intel Xeon E5-2697 V3','Speed:2.6GHz,Cores:14,TDP:145W',2326.27,2774.98,1);
+Insert into PRODUCTS (PRODUCT_ID,PRODUCT_NAME,DESCRIPTION,STANDARD_COST,LIST_PRICE,CATEGORY_ID) values (249,'Intel Xeon E5-2698 V3 (OEM/Tray)','Speed:2.3GHz,Cores:16,TDP:135W',2035.18,2660.72,1);
+Insert into PRODUCTS (PRODUCT_ID,PRODUCT_NAME,DESCRIPTION,STANDARD_COST,LIST_PRICE,CATEGORY_ID) values (2,'Intel Xeon E5-2697 V4','Speed:2.3GHz,Cores:18,TDP:145W',2144.4,2554.99,1);
+Insert into PRODUCTS (PRODUCT_ID,PRODUCT_NAME,DESCRIPTION,STANDARD_COST,LIST_PRICE,CATEGORY_ID) values (45,'Intel Xeon E5-2685 V3 (OEM/Tray)','Speed:2.6GHz,Cores:12,TDP:120W',2012.11,2501.69,1);
+-----
+
+3. 작성한 테이블의 구조를 확인할 때
+   - DESC 테이블명
+
+4. 작성한 테이블의 내용을 확인할 때
+   - SELECT * FROM 테이블명;
+
+5. SELECT
+  (1) 자료 검색을 위한 SELECT 사용법
+      - SELECT column_1,  column_2, ... FROM  테이블명;
+      - 조건을 위한 WHERE
+      - SELECT는 정렬을 위한 : ORDER BY column 오름/내림차순
+      - 집계함수의 그룹화를 위한 GROUP BY
+      - GROUP BY의 조건 설정을 위한 HAVING
+      - 여러 테이블을 연결해 사용하기 위한 JOIN
+
+  (2) 자료 정렬을 위한 SELECT
+      - SELECT column_1,  column_2,  column_3, ... FROM  테이블명 
+         ORDER BY 
+            column1 [ASC | DESC], column_2 [ASC | DESC] ; 
+
+     - 데이터 정렬 : 디센딩, 어센딩
+	- select * 
+	    from emp order by sal; -> 오름차순
+	
+	- select * 
+	    from emp order by sal desc; -> 내림차순
+	
+	- select * 
+	    from emp order by empno;
+
+	- select * from emp order by deptno asc, sal desc;
+		: deptno 내림차순 후 동일한 값이 있으면 sal로 내림차순 정렬
+
+     - SELECT customer_id, name FROM 테이블명 ORDER BY UPPER( name );
+
+  (3) 중복 데이터를 한 번만 표시하여 결과를 출력하는 다중행 함수
+     1) Distinct
+         - SELECT DISTINCT column_1 FROM 테이블명;
+
+         - SELECT DISTINCT salesman_id FROM orders WHERE status = 'Canceled';
+
+select sum(sal) from emp;
+select max(sal) from emp;
+select min(sal) from emp;
+select count(sal) from emp;
+select avg(sal) from emp;
+select distinct(comm) from emp;
+-------------------------------------------------------------------------------------------------------------------------
+
+  (4) 조건 검색을 위한 Where
+     1) SELECT column_1,  column_2,  column_3, ... FROM  테이블명  WHERE 조건 컬럼 = 검색 값;
+        ex) SELECT product_name, description, list_price, category_id FROM products WHERE product_name = 'Kingston';
+             SELECT product_name, list_price FROM products WHERE list_price > 500;
+
+     2) AND
+        - SELECT product_name, list_price FROM products WHERE list_price > 500 AND category_id = 1;
+        - SELECT product_name, list_price FROM products WHERE list_price BETWEEN 2000 AND 3000 ORDER BY list_price;
+
+        - SELECT * FROM orders WHERE status = 'Pending' AND customer_id = 4
+           ORDER BY order_date;
+
+       - SELECT * FROM orders WHERE (status = 'Canceled' OR status = 'Pending') AND customer_id = 1 ORDER BY order_date;
+
+       *** value >= low AND value <= high
+            BETWEEN A AND B : BETWEEN low AND high
+ 
+            - SELECT * FROM products WHERE standard_cost NOT BETWEEN 500 AND 600 
+               ORDER BY product_name;
+
+            - SELECT * FROM orders WHERE order_date BETWEEN DATE '2016-12-01' AND DATE '2016-12-31' ORDER BY order_date;
+ 
+
+     3) OR
+       - SELECT * FROM orders WHERE status = 'Pending' OR status = 'Canceled' ORDER BY order_date DESC;
+       - SELECT * FROM orders WHERE salesman_id = 60 OR salesman_id = 61 OR salesman_id = 62 ORDER BY order_date DESC;
+
+       - SELECT * FROM orders WHERE ( status = 'Canceled'  OR status = 'Pending' )  AND customer_id = 44 ORDER BY  order_date;
+
+       - SELECT product_name, category_id FROM products WHERE category_id IN(1, 4) ORDER BY product_name;
+       - SELECT * FROM orders WHERE salesman_id IN(60, 61, 62) ORDER BY order_date DESC;
+
+       - SELECT  * FROM orders WHERE status NOT IN('Shipped', 'Canceled') ORDER BY order_id;
+
+    4) not 
+       - select * from emp where not sal = 3000;
+       - select * from emp where sal <> 3000;
+       - select * from emp where sal != 3000;
+
+     4) LIKE
+         - expresion [NOT] LIKE pattern [ ESCAPE escape_characters ] 
+         - SELECT product_name, list_price FROM products WHERE product_name LIKE 'Asus%' ORDER BY list_price;
+         - SELECT * FROM contacts WHERE last_name LIKE 'St%' ORDER BY last_name;
+         - SELECT * FROM contacts WHERE last_name LIKE '%er' ORDER BY last_name;
+         - SELECT * FROM contacts WHERE UPPER( first_name ) LIKE 'CH%' ORDER BY first_name;
+
+     5) NULL
+         - SELECT * FROM orders WHERE salesman_id = NULL ORDER BY order_date DESC;
+         - SELECT * FROM orders WHERE salesman_id IS NULL ORDER BY order_date DESC;
+         - SELECT * FROM orders WHERE salesman_id IS NOT NULL ORDER BY order_date DESC;
+
+     6) GROUP BY ~ HAVING
+         - SELECT  column_list FROM 테이블명  GROUP BY c1,c2,c3;
+         - SELECT  column_list FROM 테이블명 WHERE  condition GROUP BY c1, c2, c3;
+
+         - SELECT customer_id, COUNT( order_id ) FROM orders GROUP BY customer_id ORDER BY customer_id;
+
+        ---------------------
+select ename, sum(sal) from emp group by ename;
+
+select deptno, job, avg(sal) from emp group by deptno, job;
+
+select deptno, job, avg(sal) from emp group by deptno, job order by deptno, job;
+
+select deptno, avg(sal) from emp group by deptno, job order by deptno, job;
+
+select deptno, job, avg(sal) from emp group by deptno order by deptno, job; //오류
+컬럼에 있으면 그룹 조건에도 있어야 한다.
+        ---------------------
+* rownum
+select * from usertbl where rownum >= 1;
+select * from usertbl where rownum >= 1 and rownum <= 10;
+
+
+        ---------------------
+         group by ~ having 조건
+         a) SELECT column_list FROM 테이블명 GROUP BY c1 HAVING group_condition;
+	select deptno, job, avg(sal) from emp group by deptno, job having avg(sal) >= 2000;
+
+             - SELECT order_id, SUM( unit_price * quantity ) order_value FROM order_items GROUP BY order_id 
+               HAVING SUM( unit_price * quantity ) > 1000000 ORDER BY order_value DESC;
+
+
+     7) 서브쿼리 
+          - SELECT MAX( list_price ) FROM products;   +  SELECT product_id, product_name, list_price FROM products WHERE list_price = 8867.99;
+            = SELECT product_id, product_name, list_price FROM products WHERE list_price > (SELECT MAX( list_price ) FROM products);
+
+
+     8) ANY
+        - operator ANY ( subquery) 
+          SELECT product_name, list_price FROM products WHERE list_price > ANY(SELECT list_price FROM products WHERE category_id = 1)
+          ORDER BY product_name;
+
+       - SELECT product_name, list_price FROM products WHERE list_price = ANY(2200, 2259.99, 2269.99) AND category_id = 1;
+
+
+     9) ALL
+       - SELECT product_name, list_price FROM products WHERE list_price >= ALL(1000, 1500, 2200) AND category_id = 1 ORDER BY list_price DESC;
+       - SELECT product_name, list_price FROM products WHERE list_price > ALL ( SELECT list_price FROM products WHERE category_id = 1 )
+         ORDER BY product_name;
+
+
+     10) JOIN
+       - CREATE TABLE palette_a (
+    id INT PRIMARY KEY,
+    color VARCHAR2 (100) NOT NULL
+);
+
+CREATE TABLE palette_b (
+    id INT PRIMARY KEY,
+    color VARCHAR2 (100) NOT NULL
+);
+
+INSERT INTO palette_a (id, color)
+VALUES (1, 'Red');
+
+INSERT INTO palette_a (id, color)
+VALUES (2, 'Green');
+
+INSERT INTO palette_a (id, color)
+VALUES (3, 'Blue');
+
+INSERT INTO palette_a (id, color)
+VALUES (4, 'Purple');
+
+-- insert data for the palette_b
+INSERT INTO palette_b (id, color)
+VALUES (1, 'Green');
+
+INSERT INTO palette_b (id, color)
+VALUES (2, 'Red');
+
+INSERT INTO palette_b (id, color)
+VALUES (3, 'Cyan');
+
+INSERT INTO palette_b (id, color)
+VALUES (4, 'Brown');
+
+       -  INNER JOIN : 교집합
+         SELECT a.id id_a, a.color color_a, b.id id_b, b.color color_b FROM palette_a a INNER JOIN palette_b b ON a.color = b.color;
+
+       - LEFT JOIN : 왼쪽 값을 기준
+         SELECT a.id id_a, a.color color_a, b.id id_b, b.color color_b FROM  palette_a a LEFT JOIN palette_b b ON a.color = b.color WHERE a.id IS NULL;
+
+       - RIGHT JOIN : 오른쪽 값을 기준
+         SELECT a.id id_a, a.color color_a, b.id id_b, b.color color_b FROM  palette_a a RIGHT JOIN palette_b b ON a.color = b.color WHERE a.id IS NULL;
+
+       - FULL OUTER JOIN : 합집합
+         SELECT a.id id_a, a.color color_a, b.id id_b, b.color color_b FROM  palette_a a FULL JOIN palette_b b ON a.color = b.color WHERE a.id IS NULL OR b.id IS NULL;
+
+
+       - TABLE COPY
+         CREATE TABLE small_orders (
+    order_id NUMBER(12) NOT NULL,
+    customer_id NUMBER(6) NOT NULL,
+    amount NUMBER(8,2) 
+);
+
+CREATE TABLE medium_orders AS
+SELECT *
+FROM small_orders;
+
+CREATE TABLE big_orders AS
+SELECT *
+FROM small_orders;
+
+-------------------------------------------------------------------------------------
+select sysdate, to_char(sysdate, 'yyyy/mm/dd') as 날짜 from dual;
+select sysdate, to_char(sysdate, 'yyyy-mm-dd hh:mi:ss') from dual;
+select sysdate, to_char(sysdate, 'yyyy-mm-dd hh24:mi:ss') from dual;
+select sysdate, to_char(sysdate, 'DL') from dual;
+select sysdate, to_char(sysdate, 'p.m. hh:mm:ss') from dual;
+-------------------------------------------------------------------------------------
+
+
+* INSERT
+  - INSERT INTO table_name (column_list) VALUES( value_list);
+  - CREATE TABLE discounts (
+    discount_id ,
+    discount_name VARCHAR2(255) NOT NULL,
+    amount NUMBER(3,1) NOT NULL,
+    start_date DATE NOT NULL,
+    expired_date DATE NOT NULL
+);
+
+  - INSERT INTO discounts(discount_name, amount, start_date, expired_date) VALUES('Summer Promotion', 9.5, DATE '2017-05-01', DATE '2017-08-31');
+  - INSERT INTO discounts(discount_name, amount, start_date, expired_date) VALUES('Winter Promotion 2017',  10.5, CURRENT_DATE, DATE '2017-12-31');
+  
+  - SELECT * FROM discounts;
+
+
+
+  - CREATE TABLE fruits (
+    fruit_name VARCHAR2(100) PRIMARY KEY,
+    color VARCHAR2(100) NOT NULL
+    );
+
+    INSERT ALL 
+    INTO fruits(fruit_name, color)
+    VALUES ('Apple','Red') 
+
+    INTO fruits(fruit_name, color)
+    VALUES ('Orange','Orange') 
+
+    INTO fruits(fruit_name, color)
+    VALUES ('Banana','Yellow')
+
+SELECT 1 FROM dual;
+
+
+* UPDATE
+  - UPDATE table_name SET column1 = value1, column2 = value2, column3 = value3, ...  WHERE condition;
+
+  - CREATE TABLE parts (
+  part_id NUMBER ,
+  part_name VARCHAR(50) NOT NULL,
+  lead_time NUMBER(2,0) NOT NULL,
+  cost NUMBER(9,2) NOT NULL,
+  status NUMBER(1,0) NOT NULL,
+  PRIMARY KEY (part_id)
+);
+
+INSERT INTO parts (part_name,lead_time,cost,status) VALUES ('sed dictum',5,134,0);
+INSERT INTO parts (part_name,lead_time,cost,status) VALUES ('tristique neque',3,62,1);
+INSERT INTO parts (part_name,lead_time,cost,status) VALUES ('dolor quam,',16,82,1);
+INSERT INTO parts (part_name,lead_time,cost,status) VALUES ('nec, diam.',41,10,1);
+INSERT INTO parts (part_name,lead_time,cost,status) VALUES ('vitae erat',22,116,0);
+
+UPDATE parts SET lead_time = 30, cost = 120, status = 1 WHERE part_id = 5;
+UPDATE parts SET cost = cost * 1.05;
+
+
+* DELETE 
+  - DELETE FROM table_name WHERE condition;
+  - DELETE FROM sales WHERE order_id = 1;
+  - DELETE FROM sales WHERE order_id = 1 AND item_id = 1;
+
+----------------------------------------------------------------------
+1. view
+create table user(userid varchar(20), passwd varchar(20), username varchar(20));
+insert into user values('busanit', '1234', 'busan'); 
+insert into user values('seoulit', '5678' 'seoul'); 
+insert into user values('daejeonit', '0000', 'daegeon');
+
+create view 테이블명_v AS SELECT userid, username FROM user;
+
+update user_v set userid = '', username = '' where userid = 'busanit';
+
+
+
+
+
