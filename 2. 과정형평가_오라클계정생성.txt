@@ -1,0 +1,28 @@
+sqlplus system/1234
+
+conn/as sysdba;
+
+alter session set "_ORACLE_SCRIPT"=true;
+
+create user koreait identified by 1234;
+grant connect, resource, dba to koreait;
+commit;
+
+select * from all_users;
+
+drop user koreait cascade;
+
+exit
+
+sqlplus
+koreait
+1234
+
+CREATE TABLE emp(
+emp_id number,
+emp_name varchar2(20),
+hiredate date,
+salary number(8, 2)
+);
+
+desc emp;
