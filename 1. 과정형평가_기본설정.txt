@@ -1,0 +1,20 @@
+** jsp 웹 프로그래밍
+- 압축해제
+1. www.eclipse.org -> jee
+2. tomcat.apache.org -> tomcat 9
+3. ojdbc6.jar
+ - C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib
+ - 오라클설치폴더\app\oracle\product\11.2.0\server\jdbc\lib
+4. 오라클 비밀번호 : system/1234
+5. HRD_수험번호 : => HRD_001
+6. 문자타입 utf-8 : window -> properties
+7. 포트번호 8080 -> 8090
+
+
+
+
+
+
+
+
+
